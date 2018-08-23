@@ -36,3 +36,93 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+
+
+const deck = document.querySelector('.deck');
+
+function shuffleDeck() {
+    const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+    const shuffledCards = shuffle(cardsToShuffle);
+    for (card of shuffledCards) {
+        deck.appendChild(card);
+    }
+}
+shuffleDeck();
+
+deck.addEventListener('click', event => {
+  const clickTarget = event.target;
+  if (isClickValid(clickTarget
+  )) {
+    toggleCard(clickTarget);
+    addToggleCard(clickTarget);
+    if (toggledCards.length === 2) {
+      checkForMatch(clickTarget);
+      addMove();
+      checkScore();
+    }
+  }
+});
+
+function toggleCard(card) {
+  card.classList.toggle('open');
+  card.classList.toggle('show');
+}
+
+
+let toggledCards = [];
+
+function addToggleCard(clickTarget) {
+  toggledCards.push(clickTarget);
+  console.log(toggledCards);
+}
+
+function checkForMatch() {
+  if (
+    toggledCards[0].firstElementChild.className ===
+    toggledCards[1].firstElementChild.className
+  ) {
+      toggledCards[0].classList.toggle('match');
+      toggledCards[1].classList.toggle('match');
+      toggledCards = [];
+  } else {
+      setTimeout(() => {
+        toggleCard(toggledCards[0]);
+        toggleCard(toggledCards[1]);
+        toggledCards = [];
+      }, 1000);
+  }
+}
+
+function isClickValid(clickTarget) {
+    return (
+          clickTarget.classList.contains('card') &&
+          !clickTarget.classList.contains('match') &&
+          toggledCards.length < 2 &&
+          !toggledCards.includes(clickTarget)
+    );
+}
+
+let moves = 0;
+function addMove() {
+  moves++;
+  const movesText = document.querySelector('.moves');
+  movesText.innerHTML = moves;
+}
+
+function checkScore() {
+    if (moves === 16 || moves === 24)
+    {   hideStar();
+    }
+}
+
+function hideStar() {
+    const starList = document.querySelectorAll('.stars li');
+    for (star of starList) {
+        if (star.style.display !== 'none') {
+            star.style.display = 'none';
+            break;
+        }
+    }
+}
