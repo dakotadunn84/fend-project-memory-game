@@ -1,8 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
-
-
+const deck = document.querySelector('.deck');
+let toggledCards = [];
+let moves = 0;
+let clockOff = true;
+let time = 0;
+let clockId;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -40,7 +44,7 @@ function shuffle(array) {
 
 
 
-const deck = document.querySelector('.deck');
+
 
 function shuffleDeck() {
     const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
@@ -53,17 +57,27 @@ shuffleDeck();
 
 deck.addEventListener('click', event => {
   const clickTarget = event.target;
-  if (isClickValid(clickTarget
-  )) {
-    toggleCard(clickTarget);
-    addToggleCard(clickTarget);
-    if (toggledCards.length === 2) {
-      checkForMatch(clickTarget);
-      addMove();
-      checkScore();
+  if (isClickValid(clickTarget)) {
+    if (clockOff) {
+      startClock();
+      clockOff = false;
     }
-  }
-});
+
+    if (clickTarget.classList.contains('card') &&
+		  toggledCards.length < 2 &&
+		  !toggledCards.includes(clickTarget)
+		  ){
+      toggleCard(clickTarget);
+      addToggleCard(clickTarget);
+
+          if (toggledCards.length === 2) {
+            checkForMatch(clickTarget);
+            addMove();
+            checkScore();
+          }
+    }
+    }
+  });
 
 function toggleCard(card) {
   card.classList.toggle('open');
@@ -71,7 +85,7 @@ function toggleCard(card) {
 }
 
 
-let toggledCards = [];
+
 
 function addToggleCard(clickTarget) {
   toggledCards.push(clickTarget);
@@ -104,7 +118,7 @@ function isClickValid(clickTarget) {
     );
 }
 
-let moves = 0;
+
 function addMove() {
   moves++;
   const movesText = document.querySelector('.moves');
@@ -125,4 +139,29 @@ function hideStar() {
             break;
         }
     }
+}
+function startClock() {
+    clockId = setInterval(() => {
+      time++;
+      displayTime();
+      console.log(time);
+    }, 1000);
+}
+
+
+
+function displayTime() {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+    const clock = document.querySelector('.clock');
+    clock.innerHTML = minutes + ":" + seconds;
+    if (seconds < 10) {
+                clock.innerHTML = `${minutes}:0${seconds}`;
+            }  else {
+                clock.innerHTML = `${minutes}:${seconds}`;
+         }
+    }
+
+function stopClock() {
+  clearInterval(clockId);
 }
