@@ -1,20 +1,15 @@
 # Memory Game Project
 
-## Table of Contents
+Hello and welcome to Dakota Dunn's Memory Game. This is a project from the Udacity Grow with Google Front End Nanodegree program. 
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+Link to the original repository for the starter code:
 
-## Instructions
+https://github.com/udacity/fend-project-memory-game.git
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+And here is the link to my branch on GitHub:
 
-To get started, open `js/app.js` and start building out the app's functionality
+https://github.com/dakotadunn84/fend-project-memory-game.git
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+And here is a link to CodePen:
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+https://codepen.io/dakotadunn84/full/aaNzPe/
